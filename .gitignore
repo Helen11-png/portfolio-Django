@@ -1,0 +1,18 @@
+# В корне проекта Django создайте файл .gitignore
+# Содержимое для Django:
+.env
+*.sqlite3
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.vscode/
+.idea/
+.DS_Store
+*.log
+db.sqlite3
+media/
+staticfiles/
