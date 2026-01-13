@@ -1,42 +1,271 @@
-{% load static %}
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Document</title>
-    <link rel="stylesheet" href="{% static 'main/css/main.css' %}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HELEN - Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            min-height: 100vh;
+            background-color: #1e1f29;
+            font-family: 'Fira Code', 'Consolas', monospace;
+            color: #f8f8f2;
+        }
+
+        /* Sidebar styles */
+        .sidebar {
+            width: 300px;
+            background-color: #282a36;
+            padding: 30px 20px;
+            border-right: 2px solid #44475a;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Avatar/photo */
+        .avatar {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #8be9fd, #bd93f9);
+            margin: 0 auto 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 60px;
+            color: #282a36;
+            font-weight: bold;
+        }
+
+        /* Contact information */
+        .contact-info {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #44475a;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            color: #f8f8f2;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .contact-item:hover {
+            color: #ff79c6;
+        }
+
+        .contact-item i {
+            margin-right: 10px;
+            color: #8be9fd;
+            width: 20px;
+            text-align: center;
+        }
+
+        /* Skills in sidebar */
+        .skills-list {
+            margin-top: 20px;
+        }
+
+        .skill-tag {
+            display: inline-block;
+            background-color: #44475a;
+            color: #8be9fd;
+            padding: 5px 10px;
+            margin: 3px;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+
+        /* Main content */
+        .main-content {
+            flex: 1;
+            padding: 40px;
+            overflow-y: auto;
+        }
+
+        .section {
+            margin-bottom: 40px;
+            background-color: rgba(40, 42, 54, 0.8);
+            padding: 25px;
+            border-radius: 10px;
+            border-left: 4px solid #ff79c6;
+        }
+
+        h2 {
+            color: #8be9fd;
+            margin-bottom: 20px;
+            font-size: 28px;
+        }
+
+        h3 {
+            color: #ff79c6;
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+
+        /* Mobile menu button (hide/show sidebar) */
+        .menu-toggle {
+            display: none;
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: #ff79c6;
+            color: #282a36;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            z-index: 1000;
+            font-family: 'Fira Code';
+            font-weight: bold;
+        }
+
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            .sidebar {
+                position: fixed;
+                left: -300px;
+                top: 0;
+                height: 100vh;
+                transition: left 0.3s;
+                z-index: 999;
+            }
+
+            .sidebar.active {
+                left: 0;
+            }
+
+            .main-content {
+                padding: 80px 20px 20px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <h1 style="color: #8BE9FD; font-size: 60px;" >HELEN</h1>
-    <pre style="
-        color: #f8f8f2;
-        font-family: 'Fira Code', 'Consolas', monospace;
-        font-size: 16px;
-        line-height: 1.5;
-        margin: 0;
-        overflow-x: auto;
-        tab-size: 2;
-    ">
-<code style="display: block;">
+    <button class="menu-toggle" id="menuToggle">
+        <i class="fas fa-bars"></i>
+    </button>
+    <aside class="sidebar" id="sidebar">
+        <div class="avatar">
+            H
+        </div>
+
+        <h1 style="color: #8BE9FD; text-align: center; margin-bottom: 10px;">HELEN</h1>
+        <p style="color: #dded95; text-align: center; margin-bottom: 20px;">FullStack Developer</p>
+
+        <div class="contact-info">
+            <h3><i class="fas fa-user"></i> Contact</h3>
+            <a href="mailto:alena.nik.07@mail.ru" class="contact-item">
+                <i class="fas fa-envelope"></i> alena.nik.07@mail.ru
+            </a>
+            <a href="https://github.com/Helen11-png" target="_blank" class="contact-item">
+                <i class="fab fa-github"></i> github.com/Helen11-png
+            </a>
+            <a href="https://ru.linkedin.com/in/%D0%B0%D0%BB%D0%B5%D0%BD%D0%B0-%D0%BD%D0%B8%D0%BA%D0%B8%D1%82%D0%B8%D0%BD%D1%81%D0%BA%D0%B0%D1%8F-917253399" target="_blank" class="contact-item">
+                <i class="fab fa-linkedin"></i> LinkedIn
+            </a>
+            <a  class="contact-item">
+                <i class="fas fa-phone"></i> +7 (916) 724-81-69
+            </a>
+        </div>
+
+        <div class="skills-list">
+            <h3><i class="fas fa-code"></i> Key Skills</h3>
+            <div>
+                <span class="skill-tag">JavaScript</span>
+                <span class="skill-tag">React Native</span>
+                <span class="skill-tag">Node.js</span>
+                <span class="skill-tag">Python</span>
+                <span class="skill-tag">HTML/CSS</span>
+                <span class="skill-tag">Git</span>
+                <span class="skill-tag">Figma</span>
+            </div>
+        </div>
+
+        <div style="margin-top: auto; padding-top: 20px; border-top: 1px solid #44475a;">
+            <p style="font-size: 12px; color: #6272a4; text-align: center;">
+                © 2024 HELEN<br>
+                All rights reserved
+            </p>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        <div class="section">
+            <h2>About Me</h2>
+            <p style="color: #f8f8f2; line-height: 1.6; margin-bottom: 15px;">
+                RTU MIREA student, specializing in Computer Science and FullStack development.
+                Looking for job and internship opportunities in the IT field.
+            </p>
+            <p style="color: #f8f8f2; line-height: 1.6;">
+                Participating in hackathons.
+                Striving to create high-quality and modern digital products.
+            </p>
+        </div>
+
+        <div class="section">
+
+            <pre style="
+                background-color: #1e1f29;
+                padding: 20px;
+                border-radius: 8px;
+                overflow-x: auto;
+                border: 1px solid #44475a;
+            ">
+<code style="display: block; font-family: 'Fira Code', monospace; font-size: 14px;">
 <span style="color: #ff79c6;">class</span> <span style="color: #8be9fd;">StudentProgrammer</span> {
-  <span style="color: #50fa7b;">constructor</span>() {
-    <span style="color: #ff79c6;">this</span>.<span style="color: #f1fa8c;">name</span> = <span style="color: #f1fa8c;">"Helen"</span>;
-    <span style="color: #ff79c6;">this</span>.<span style="color: #f1fa8c;">birthYear</span> = <span style="color: #bd93f9;">2007</span>;
-    <span style="color: #ff79c6;">this</span>.<span style="color: #f1fa8c;">education</span> = {
-      <span style="color: #f1fa8c;">university</span>: <span style="color: #f1fa8c;">"RTU MIREA"</span>,
-      <span style="color: #f1fa8c;">specialty</span>: <span style="color: #f1fa8c;">"Computer Science, FullStack Development "</span>,
+  <span style="color: #ff79c6;">constructor</span>() {
+    <span style="color: #ff79c6;">this</span>.<span style="color: #ffffff;">name</span><span style="color: #ff79c6;"> = </span><span style="color: #ffffff;">"Helen"</span>;
+    <span style="color: #ff79c6;">this</span>.<span style="color: #ffffff;">birthYear</span><span style="color: #ff79c6;"> = </span><span style="color: #bd93f9;">2007</span>;
+    <span style="color: #ff79c6;">this</span>.<span style="color: #ffffff;">education</span><span style="color: #ff79c6;"> = </span>{
+      <span style="color: #ffffff;">university</span><span style="color: #ff79c6;">: </span><span style="color: #dded95;">"RTU MIREA"</span>,
+      <span style="color: #ffffff;">specialty</span><span style="color: #ff79c6;">: </span><span style="color: #dded95;">"Computer Science, FullStack Development "</span>,
     };
-    <span style="color: #ff79c6;">this</span>.<span style="color: #f1fa8c;">status</span> = <span style="color: #f1fa8c;">"Open to work"</span>;
-    <span style="color: #ff79c6;">this</span>.<span style="color: #f1fa8c;">skills</span> = {
-        <span style="color: #f1fa8c;">languages</span>: [<span style="color: #f1fa8c;">"JavaScript"</span>, <span style="color: #f1fa8c;">"Python"</span>, <span style="color: #f1fa8c;">"C++"</span>],
-        <span style="color: #f1fa8c;">frontend</span>: [<span style="color: #f1fa8c;">"React Native"</span>, <span style="color: #f1fa8c;">"HTML/CSS"</span>, <span style="color: #f1fa8c;">"Figma"</span>],
-        <span style="color: #f1fa8c;">backend</span>: [<span style="color: #f1fa8c;">"Node.js"</span>, <span style="color: #f1fa8c;">"Django"</span>],
-        <span style="color: #f1fa8c;">tools</span>: [<span style="color: #f1fa8c;">"Git"</span>],
-        <span style="color: #f1fa8c;">experienceFromHackathons</span>: [<span style="color: #f1fa8c;">"ML"</span>, <span style="color: #f1fa8c;">"Development"</span>]
+    <span style="color: #ff79c6;">this</span>.<span style="color: #ffffff;">status</span><span style="color: #ff79c6;"> = </span><span style="color: #dded95;">"Open to work"</span>;
+    <span style="color: #ff79c6;">this</span>.<span style="color: #ffffff;">skills</span><span style="color: #ff79c6;"> = </span>{
+        <span style="color: #ffffff;">languages</span><span style="color: #ff79c6;">: </span>[<span style="color: #dded95;">"JavaScript"</span>, <span style="color: #dded95;">"Python"</span>, <span style="color: #dded95;">"C++"</span>],
+        <span style="color: #ffffff;">frontend</span><span style="color: #ff79c6;">: </span>[<span style="color: #dded95;">"React Native"</span>, <span style="color: #dded95;">"HTML/CSS"</span>, <span style="color: #dded95;">"Figma"</span>],
+        <span style="color: #ffffff;">backend</span><span style="color: #ff79c6;">: </span>[<span style="color: #dded95;">"Node.js"</span>, <span style="color: #dded95;">"Django"</span>],
+        <span style="color: #ffffff;">tools</span><span style="color: #ff79c6;">: </span>[<span style="color: #dded95;">"Git"</span>],
+        <span style="color: #ffffff;">experienceFromHackathons</span><span style="color: #ff79c6;">: </span>[<span style="color: #dded95;">"ML"</span>, <span style="color: #dded95;">"Development"</span>]
     };
   }
 }
 </code>
-    </pre>
-</div>
+            </pre>
+        </div>
+    </main>
+
+    <script>
+        // Mobile menu script
+        const menuToggle = document.getElementById('menuToggle');
+        const sidebar = document.getElementById('sidebar');
+
+        menuToggle.addEventListener('click', () => {
+            sidebar.classList.toggle('active');
+        });
+
+        // Close menu when clicking on main area
+        document.querySelector('.main-content').addEventListener('click', () => {
+            if (window.innerWidth <= 768) {
+                sidebar.classList.remove('active');
+            }
+        });
+    </script>
 </body>
 </html>
