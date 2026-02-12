@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css">
     <title>HELEN - Portfolio</title>
     <style>
         * {
@@ -18,7 +19,6 @@
             font-family: 'Fira Code', 'Consolas', monospace;
             color: #f8f8f2;
         }
-
         /* Sidebar styles */
         .sidebar {
             width: 300px;
@@ -28,13 +28,12 @@
             display: flex;
             flex-direction: column;
         }
-
         /* Avatar/photo */
         .avatar {
             width: 180px;
             height: 180px;
             border-radius: 50%;
-            background: linear-gradient(135deg, #8be9fd, #bd93f9);
+            background: linear-gradient(135deg, #8be9fd, #282a36);
             margin: 0 auto 25px;
             display: flex;
             align-items: center;
@@ -43,14 +42,12 @@
             color: #282a36;
             font-weight: bold;
         }
-
         /* Contact information */
         .contact-info {
             margin-top: 20px;
             padding-top: 20px;
             border-top: 1px solid #44475a;
         }
-
         .contact-item {
             display: flex;
             align-items: center;
@@ -98,7 +95,7 @@
             background-color: rgba(40, 42, 54, 0.8);
             padding: 25px;
             border-radius: 10px;
-            border-left: 4px solid #ff79c6;
+            border-left: 4px solid #8be9fd;
         }
 
         h2 {
@@ -199,7 +196,7 @@
 
         <div style="margin-top: auto; padding-top: 20px; border-top: 1px solid #44475a;">
             <p style="font-size: 12px; color: #6272a4; text-align: center;">
-                © 2024 HELEN<br>
+                © 2025 HELEN<br>
                 All rights reserved
             </p>
         </div>
@@ -217,7 +214,6 @@
                 Striving to create high-quality and modern digital products.
             </p>
         </div>
-
         <div class="section">
 
             <pre style="
@@ -249,23 +245,28 @@
 </code>
             </pre>
         </div>
+        <div class="section">
+            <h2>Certificates</h2>
+            <p style="color: #f8f8f2; line-height: 1.6; margin-bottom: 15px;">
+               My hackatons' and courses' certificates:
+            </p>
+            <a href="static/main/img/ML_views_predictor.png" data-lightbox="image-1">
+                <img src="static/main/img/ML_views_predictor.png" style="width: 180px; height: 250px">
+            </a>
+        </div>
     </main>
-
-    <script>
-        // Mobile menu script
-        const menuToggle = document.getElementById('menuToggle');
-        const sidebar = document.getElementById('sidebar');
-
-        menuToggle.addEventListener('click', () => {
-            sidebar.classList.toggle('active');
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
+<script>
+        lightbox.option({
+            'wrapAround': true,
+            'albumLabel': 'Image %1 of %2'
         });
-
-        // Close menu when clicking on main area
-        document.querySelector('.main-content').addEventListener('click', () => {
-            if (window.innerWidth <= 768) {
-                sidebar.classList.remove('active');
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('lightboxOverlay')) {
+                var closeBtn = document.querySelector('.lb-close');
+                if (closeBtn) closeBtn.click();
             }
         });
-    </script>
+</script>
 </body>
 </html>
