@@ -133,7 +133,7 @@
             </p>
             <div class="certificates-gallery">
                 <div class="cert-item" data-index="3">
-                    <img src="static/main/img/course1.jpg" alt="Sprint hack university certificate">
+                    <img src="static/main/img/course1.jpg" alt="21th school (sber) and netology certificate">
                 </div>
             </div>
         </div>
@@ -163,126 +163,136 @@
     </div>
 
     <script>
-        // Gallery images array (paths)
-        const certificateImages = [
+    // Массив с данными о всех сертификатах
+    const certificatesData = [
+        // Первая галерея (hackathons)
+        [
             "static/main/img/ML_views_predictor.png",
             "static/main/img/1с.jpg",
             "static/main/img/cup_it_2026.jpg",
             "static/main/img/sprint_hack_university.jpg"
-        ];
+        ],
+        // Вторая галерея (courses)
+        [
+            "static/main/img/course1.jpg"
+        ]
+    ];
 
-        let currentIndex = 0;
-        const lightboxModal = document.getElementById('lightboxModal');
-        const sliderImage = document.getElementById('sliderImage');
-        const prevBtn = document.getElementById('prevSlideBtn');
-        const nextBtn = document.getElementById('nextSlideBtn');
-        const closeBtn = document.getElementById('closeLightboxBtn');
-        const counterSpan = document.getElementById('slideCounter');
+    let currentGalleryIndex = 0;
+    let currentImageIndex = 0;
+    let currentGallery = certificatesData[0];
 
-        // Function to update slider image and counter
-        function updateSlider() {
-            if (certificateImages.length > 0 && currentIndex >= 0 && currentIndex < certificateImages.length) {
-                sliderImage.src = certificateImages[currentIndex];
-                counterSpan.textContent = `${currentIndex + 1} / ${certificateImages.length}`;
-            }
+    const lightboxModal = document.getElementById('lightboxModal');
+    const sliderImage = document.getElementById('sliderImage');
+    const prevBtn = document.getElementById('prevSlideBtn');
+    const nextBtn = document.getElementById('nextSlideBtn');
+    const closeBtn = document.getElementById('closeLightboxBtn');
+    const counterSpan = document.getElementById('slideCounter');
+
+    function updateSlider() {
+        if (currentGallery && currentImageIndex >= 0 && currentImageIndex < currentGallery.length) {
+            sliderImage.src = currentGallery[currentImageIndex];
+            counterSpan.textContent = `${currentImageIndex + 1} / ${currentGallery.length}`;
         }
+    }
 
-        // Open lightbox with specific index
-        function openLightbox(index) {
-            if (index >= 0 && index < certificateImages.length) {
-                currentIndex = index;
+    function openLightbox(galleryIndex, imageIndex) {
+        if (galleryIndex >= 0 && galleryIndex < certificatesData.length) {
+            currentGalleryIndex = galleryIndex;
+            currentGallery = certificatesData[galleryIndex];
+            if (imageIndex >= 0 && imageIndex < currentGallery.length) {
+                currentImageIndex = imageIndex;
                 updateSlider();
                 lightboxModal.classList.add('active');
-                document.body.style.overflow = 'hidden'; // prevent background scroll
+                document.body.style.overflow = 'hidden';
             }
         }
+    }
 
-        // Close lightbox
-        function closeLightbox() {
-            lightboxModal.classList.remove('active');
-            document.body.style.overflow = ''; // restore scroll
-        }
+    function closeLightbox() {
+        lightboxModal.classList.remove('active');
+        document.body.style.overflow = '';
+    }
 
-        // Next slide
-        function nextSlide() {
-            if (certificateImages.length === 0) return;
-            currentIndex = (currentIndex + 1) % certificateImages.length;
-            updateSlider();
-        }
+    function nextSlide() {
+        if (!currentGallery || currentGallery.length === 0) return;
+        currentImageIndex = (currentImageIndex + 1) % currentGallery.length;
+        updateSlider();
+    }
 
-        // Previous slide
-        function prevSlide() {
-            if (certificateImages.length === 0) return;
-            currentIndex = (currentIndex - 1 + certificateImages.length) % certificateImages.length;
-            updateSlider();
-        }
+    function prevSlide() {
+        if (!currentGallery || currentGallery.length === 0) return;
+        currentImageIndex = (currentImageIndex - 1 + currentGallery.length) % currentGallery.length;
+        updateSlider();
+    }
 
-        // Event listeners for gallery items
-        const certItems = document.querySelectorAll('.cert-item');
-        certItems.forEach((item, idx) => {
+    // Назначаем обработчики для всех элементов галереи
+    const allGalleries = document.querySelectorAll('.certificates-gallery');
+    allGalleries.forEach((gallery, galleryIdx) => {
+        const items = gallery.querySelectorAll('.cert-item');
+        items.forEach((item, itemIdx) => {
+            // Убираем старый data-index и используем замыкание
             item.addEventListener('click', (e) => {
                 e.stopPropagation();
-                openLightbox(idx);
+                openLightbox(galleryIdx, itemIdx);
             });
         });
+    });
 
-        // Buttons events
-        prevBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
+    // Обработчики кнопок
+    prevBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        prevSlide();
+    });
+
+    nextBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        nextSlide();
+    });
+
+    closeBtn.addEventListener('click', closeLightbox);
+
+    lightboxModal.addEventListener('click', (e) => {
+        if (e.target === lightboxModal) {
+            closeLightbox();
+        }
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (!lightboxModal.classList.contains('active')) return;
+
+        if (e.key === 'ArrowLeft') {
             prevSlide();
-        });
-        nextBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
+            e.preventDefault();
+        } else if (e.key === 'ArrowRight') {
             nextSlide();
-        });
-        closeBtn.addEventListener('click', closeLightbox);
+            e.preventDefault();
+        } else if (e.key === 'Escape') {
+            closeLightbox();
+            e.preventDefault();
+        }
+    });
 
-        // Close lightbox when clicking on background (modal itself but not on image or buttons)
-        lightboxModal.addEventListener('click', (e) => {
-            // Close only if clicked directly on modal background (not on slider-container elements)
-            if (e.target === lightboxModal) {
-                closeLightbox();
+    // Mobile sidebar toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const sidebar = document.getElementById('sidebar');
+
+    if (menuToggle) {
+        menuToggle.addEventListener('click', () => {
+            sidebar.classList.toggle('active');
+        });
+    }
+
+    const mainContent = document.querySelector('.main-content');
+    if (mainContent) {
+        mainContent.addEventListener('click', (e) => {
+            if (window.innerWidth <= 768 && sidebar.classList.contains('active')) {
+                sidebar.classList.remove('active');
             }
         });
+    }
 
-        // Keyboard navigation
-        document.addEventListener('keydown', (e) => {
-            if (!lightboxModal.classList.contains('active')) return;
-
-            if (e.key === 'ArrowLeft') {
-                prevSlide();
-                e.preventDefault();
-            } else if (e.key === 'ArrowRight') {
-                nextSlide();
-                e.preventDefault();
-            } else if (e.key === 'Escape') {
-                closeLightbox();
-                e.preventDefault();
-            }
-        });
-
-        // Mobile sidebar toggle (keeping your existing functionality)
-        const menuToggle = document.getElementById('menuToggle');
-        const sidebar = document.getElementById('sidebar');
-
-        if (menuToggle) {
-            menuToggle.addEventListener('click', () => {
-                sidebar.classList.toggle('active');
-            });
-        }
-
-        // Close sidebar when clicking on main content on mobile (optional)
-        const mainContent = document.querySelector('.main-content');
-        if (mainContent) {
-            mainContent.addEventListener('click', (e) => {
-                if (window.innerWidth <= 768 && sidebar.classList.contains('active')) {
-                    sidebar.classList.remove('active');
-                }
-            });
-        }
-
-        // Fix for any potential issues with images not loading - just console log
-        console.log("Custom slider gallery initialized with", certificateImages.length, "certificates");
-    </script>
+    console.log("Multi-gallery initialized with", certificatesData.length, "galleries");
+</script>
 </body>
 </html>
