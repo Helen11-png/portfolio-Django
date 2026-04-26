@@ -34,6 +34,26 @@ body {
     color: #282a36;
     font-weight: bold;
 }
+.language-switcher {
+    display: inline-block;
+    margin-bottom: 40px;
+    background-color: rgba(40, 42, 54, 0.8);
+    padding: 16px;
+    border-radius: 7px;
+    border: 1px solid #8be9fd;
+    text-decoration: none;
+    color: #ff79c6;
+
+    transition: all 0.3s ease; /* плавность при наведении */
+
+}
+.language-switcher:hover {
+    background-color: rgba(40, 42, 54, 1);
+    border: 4px solid #ff79c6;  /* меняем цвет при наведении */
+    transform: translateX(5px);      /* небольшой эффект */
+    color: #8be9fd;
+
+}
 /* Contact information */
 .contact-info {
     margin-top: 20px;
