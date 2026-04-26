@@ -3,3 +3,6 @@ from django.http import HttpResponse
 
 def main(request):
     return render(request, 'main/main.html')
+
+def main_ru(request):
+    return render(request, 'main/main_ru.html')
