@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="icon" type="image/x-icon" href="static/main/img/for_design/cat1.jpg">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -151,8 +152,14 @@
                 </a>
             </p>
         </div>
-    </main>
 
+        <div style="text-align: right; margin-top: 80px; padding: 20px 0; border-top: 1px solid #44475a;">
+            <div style="display: flex; justify-content: flex-end; align-items: center; gap: 10px;">
+                <span style="font-size: 16px; color: #6272a4;">Powered by sleepless nights</span>
+                <img src="static/main/img/for_design/cat4(1).png" alt="cat" style="width: 70px; height: auto;">
+            </div>
+        </div>
+    </main>
     <!-- Lightbox / Slider Modal -->
     <div class="lightbox-modal" id="lightboxModal">
         <button class="close-lightbox" id="closeLightboxBtn">&times;</button>
@@ -167,7 +174,6 @@
         </div>
         <div class="counter" id="slideCounter">1 / 4</div>
     </div>
-
     <script>
     // Массив с данными о всех сертификатах
     const certificatesData = [
@@ -302,4 +308,5 @@
     console.log("Multi-gallery initialized with", certificatesData.length, "galleries");
 </script>
 </body>
+
 </html>
