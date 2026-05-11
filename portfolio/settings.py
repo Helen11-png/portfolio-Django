@@ -43,6 +43,13 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+# Кэширование (для LeetCode API)
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+    }
+}
+
 ROOT_URLCONF = 'portfolio.urls'
 
 TEMPLATES = [
