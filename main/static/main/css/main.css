@@ -80,6 +80,29 @@ body {
     text-align: center;
 }
 
+.stat-circle {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-right: 8px;
+}
+
+#leetcodeStats div {
+    margin-bottom: 12px;  /* ← ЭТО ДАСТ РАССТОЯНИЕ МЕЖДУ СТРОКАМИ */
+}
+.stat-circle {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-right: 6px;
+}
+.circle-easy { background-color: #ff79c6; }
+.circle-medium { background-color: #8be9fd; }
+.circle-hard { background-color: #1e1f2c; }
+
+
 /* Skills in sidebar */
 .skills-list {
     margin-top: 20px;

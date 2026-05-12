@@ -1,17 +1,84 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Моя первая круговая диаграмма</title>
+    <title>диаграмма</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <link rel="stylesheet" href="static/main/css/main.css">
 </head>
 <body>
     <!-- Контейнер для статистики (текстовая информация) -->
-    <div id="leetcodeStats"></div>
+
+    <!-- В вашем основном файле, например, после секции с проектами -->
+<div class="section">
+    <h2><i class="fas fa-chart-pie"></i> LeetCode Progress</h2>
+
+    <!-- Текстовая статистика -->
+    <div id="leetcodeStats" style="margin-bottom: 20px;"></div>
 
     <!-- Холст для диаграммы -->
-    <canvas id="myPieChart" width="400" height="400"></canvas>
+    <canvas id="myPieChart" width="400" height="400" style="max-width: 300px; margin: 0 auto; display: block;"></canvas>
+</div>
 
+<!-- Подключаем Chart.js в <head> вашего основного файла -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script> -->
+
+<script>
+// Весь тот же скрипт, что у вас есть
+fetch('/api/leetcode/')
+    .then(response => response.json())
+    .then(data => {
+        if (data.error) {
+            document.getElementById('leetcodeStats').innerHTML = `<p>⚠️ ${data.error}</p>`;
+            return;
+        }
+
+        document.getElementById('leetcodeStats').innerHTML = `
+            <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                <span>✅ Total: ${data.total_solved}</span>
+                <span>🟢 Easy: ${data.easy}</span>
+                <span>🟡 Medium: ${data.medium}</span>
+                <span>🔴 Hard: ${data.hard}</span>
+                <span>🏆 Rank: #${data.ranking}</span>
+            </div>
+        `;
+
+        const ctx = document.getElementById('myPieChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Easy', 'Medium', 'Hard'],
+                datasets: [{
+                    data: [data.easy, data.medium, data.hard],
+                    backgroundColor: [
+                        '#50fa7b',  // зеленый для easy
+                        '#ffb86c',  // оранжевый для medium
+                        '#ff5555'   // красный для hard
+                    ],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: { color: '#f8f8f2' }
+                    }
+                }
+            }
+        });
+    })
+    .catch(error => {
+        document.getElementById('leetcodeStats').innerHTML = '<p>⚠️ Solve at least one problem to see stats</p>';
+    });
+</script>
+    <div id="leetcodeStats" ></div>
+
+    <!-- Холст для диаграммы -->
+    <div class="section">
+    <canvas id="myPieChart" width="400" height="400"></canvas>
+    </div>
     <script>
         // Получаем данные с вашего API
         fetch('/api/leetcode/')
@@ -30,10 +97,7 @@
                     <p>🔴 Hard: ${data.hard}</p>
                     <p>🏆 Ranking: #${data.ranking}</p>
                 `;
-
-                // Рисуем диаграмму (ctx объявляем здесь!)
                 const ctx = document.getElementById('myPieChart').getContext('2d');
-
                 new Chart(ctx, {
                     type: 'doughnut', // 'pie' или 'doughnut'
                     data: {
