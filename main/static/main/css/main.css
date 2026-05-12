@@ -102,6 +102,24 @@ body {
 .circle-medium { background-color: #8be9fd; }
 .circle-hard { background-color: #1e1f2c; }
 
+/* Убираем лишние отступы у секции с графиком */
+.section:last-of-type {
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+/* Конкретно для блока LeetCode - убираем пустоту */
+#leetcodeStats,
+#myPieChart {
+    margin: 0;
+    padding: 0;
+}
+
+/* Блок с графиком и статистикой */
+.section > div[style*="display: flex"] {
+    margin: 0 !important;
+    padding: 0 !important;
+}
 
 /* Skills in sidebar */
 .skills-list {
@@ -313,4 +331,28 @@ h3 {
         width: 140px;
         height: 200px;
     }
+}
+/* Убираем внутренние отступы у секции с графиком */
+.section:has(canvas) {
+    padding-top: 15px !important;
+    padding-bottom: 15px !important;
+}
+
+/* Убираем лишнюю высоту у canvas */
+#myPieChart {
+    display: block;
+    max-height: 200px !important;
+    width: auto !important;
+}
+
+/* Сжимаем отступы внутри flex-контейнера */
+.section > div[style*="display: flex"] {
+    gap: 20px !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+}
+
+/* Убираем отступы у заголовка внутри секции */
+.section > h2 {
+    margin-bottom: 10px !important;
 }
