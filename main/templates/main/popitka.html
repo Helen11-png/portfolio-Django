@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Моя первая круговая диаграмма</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <link rel="stylesheet" href="static/main/css/main.css">
+</head>
+<body>
+    <!-- Контейнер для статистики (текстовая информация) -->
+    <div id="leetcodeStats"></div>
+
+    <!-- Холст для диаграммы -->
+    <canvas id="myPieChart" width="400" height="400"></canvas>
+
+    <script>
+        // Получаем данные с вашего API
+        fetch('/api/leetcode/')
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    document.getElementById('leetcodeStats').innerHTML = `<p>⚠️ ${data.error}</p>`;
+                    return;
+                }
+
+                // Показываем текстовую статистику
+                document.getElementById('leetcodeStats').innerHTML = `
+                    <p>✅ Total solved: ${data.total_solved}</p>
+                    <p>🟢 Easy: ${data.easy}</p>
+                    <p>🟡 Medium: ${data.medium}</p>
+                    <p>🔴 Hard: ${data.hard}</p>
+                    <p>🏆 Ranking: #${data.ranking}</p>
+                `;
+
+                // Рисуем диаграмму (ctx объявляем здесь!)
+                const ctx = document.getElementById('myPieChart').getContext('2d');
+
+                new Chart(ctx, {
+                    type: 'doughnut', // 'pie' или 'doughnut'
+                    data: {
+                        labels: ['Easy', 'Medium', 'Hard'],
+                        datasets: [{
+                            data: [data.easy, data.medium, data.hard],
+                            backgroundColor: [
+                                'rgba(40, 42, 54, 0.8)',
+                                'rgba(54, 162, 235, 0.7)',
+                                'rgba(40, 42, 54, 1)',
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                position: 'top',
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        const label = context.label || '';
+                                        const value = context.raw || 0;
+                                        const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                        const percentage = Math.round((value / total) * 100);
+                                        return `${label}: ${value} (${percentage}%)`;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            })
+            .catch(error => {
+                document.getElementById('leetcodeStats').innerHTML = '<p>⚠️ Error loading stats</p>';
+                console.error('Error:', error);
+            });
+    </script>
+</body>
+</html>

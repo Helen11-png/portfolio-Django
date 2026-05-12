@@ -11,6 +11,8 @@ def main(request):
 def main_ru(request):
     return render(request, 'main/main_ru.html')
 
+def popitka(request):
+    return render(request, 'main/popitka.html')
 
 @csrf_exempt
 @cache_page(60 * 60 * 6)  # кэш на 6 часов
