@@ -145,6 +145,23 @@
             </div>
         </div>
         <div class="section">
+            <h2>Дополнительное обучение в Московской Школе Программистов (2020-2025)</h2>
+            <p style="color: #f8f8f2; line-height: 1.6; margin-bottom: 15px;">
+               Свидетельство:
+            </p>
+            <div class="certificates-gallery">
+                <div class="cert-item" data-index="6">
+                    <img src="/static/main/img/prog_school/СВИДЕТЕЛЬСТВО_МШП_ОБЛОЖКА.png" alt="cover">
+                </div>
+                <div class="cert-item" data-index="7">
+                    <img class="needs-rotate" data-rotate="90" src="/static/main/img/prog_school/СВИДЕТЕЛЬСТВО_МШП.png" alt="info">
+                </div>
+                <div class="cert-item" data-index="8">
+                    <img class="needs-rotate" data-rotate="270" src="/static/main/img/prog_school/ОЦЕНКИ_МШП.png" alt="score">
+                </div>
+            </div>
+        </div>
+        <div class="section">
             <h2>Мои проекты</h2>
             <p style="color: #f8f8f2; line-height: 1.6; margin-bottom: 15px;">
                 <a href="http://ip-nikitinskiy-av.ru/" target="_blank">
@@ -186,7 +203,6 @@
     <script>
     // Массив с данными о всех сертификатах
     const certificatesData = [
-        // Первая галерея (hackathons)
         [
             "/static/main/img/ML_views_predictor.png",
             "/static/main/img/1с.jpg",
@@ -194,9 +210,13 @@
             "/static/main/img/sprint_hack_university.jpg",
             "/static/main/img/it_purple_hack.jpg"
         ],
-        // Вторая галерея (courses)
         [
             "/static/main/img/course1.jpg"
+        ],
+        [
+            "/static/main/img/prog_school/СВИДЕТЕЛЬСТВО_МШП_ОБЛОЖКА.png",
+            "/static/main/img/prog_school/СВИДЕТЕЛЬСТВО_МШП.png",
+            "/static/main/img/prog_school/ОЦЕНКИ_МШП.png"
         ]
     ];
 
@@ -215,8 +235,22 @@
         if (currentGallery && currentImageIndex >= 0 && currentImageIndex < currentGallery.length) {
             sliderImage.src = currentGallery[currentImageIndex];
             counterSpan.textContent = `${currentImageIndex + 1} / ${currentGallery.length}`;
+            applyRotation();
         }
     }
+
+    function applyRotation() {
+    const currentSrc = decodeURIComponent(sliderImage.src);
+    if (currentSrc.includes('СВИДЕТЕЛЬСТВО_МШП.png')) {
+        sliderImage.style.transform = 'rotate(90deg)';
+
+    } else if (currentSrc.includes('ОЦЕНКИ_МШП.png')) {
+        sliderImage.style.transform = 'rotate(90deg)';
+
+    } else {
+        sliderImage.style.transform = '';
+    }
+}
 
     function openLightbox(galleryIndex, imageIndex) {
         if (galleryIndex >= 0 && galleryIndex < certificatesData.length) {
@@ -234,6 +268,7 @@
     function closeLightbox() {
         lightboxModal.classList.remove('active');
         document.body.style.overflow = '';
+        sliderImage.style.transform = '';
     }
 
     function nextSlide() {
