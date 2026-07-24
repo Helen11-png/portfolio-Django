@@ -17,7 +17,7 @@ def popitka(request):
 @csrf_exempt
 @cache_page(60 * 60 * 6)  # кэш на 6 часов
 def leetcode_stats(request):
-    username = "helen_png"
+    username = "helen11_png"
     query = """
     query userProfile($username: String!) {
         matchedUser(username: $username) {
