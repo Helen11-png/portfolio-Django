@@ -15,7 +15,7 @@ def popitka(request):
     return render(request, 'main/popitka.html')
 
 @csrf_exempt
-@cache_page(60 * 60 * 6)  # кэш на 6 часов
+@cache_page(60 * 30)
 def leetcode_stats(request):
     username = "helen11_png"
     query = """
