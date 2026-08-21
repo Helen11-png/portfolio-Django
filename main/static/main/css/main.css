@@ -21,6 +21,8 @@ body {
     flex-direction: column;
 }
 /* Avatar/photo */
+
+/* Avatar/photo */
 .avatar {
     width: 180px;
     height: 180px;
@@ -33,6 +35,15 @@ body {
     font-size: 60px;
     color: #282a36;
     font-weight: bold;
+    overflow: hidden;
+}
+
+.avatar-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    display: block;
 }
 .language-switcher {
     display: inline-block;
