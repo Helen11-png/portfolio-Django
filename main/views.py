@@ -14,6 +14,9 @@ def main_ru(request):
 def popitka(request):
     return render(request, 'main/popitka.html')
 
+def cv(request):
+    return render(request, 'main/cv.html')
+
 @csrf_exempt
 @cache_page(60 * 30)
 def leetcode_stats(request):
