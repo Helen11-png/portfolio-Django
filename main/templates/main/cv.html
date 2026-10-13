@@ -1,17 +1,47 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="icon" type="image/x-icon" href="static/main/img/for_design/cat1.jpg">
+    <link rel="icon" type="image/x-icon" href="{% static 'main/img/for_design/cat1.jpg' %}">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <title>CV</title>
-    <link rel="stylesheet" href="static/main/css/main.css">
+    <link rel="stylesheet" href="{% static 'main/css/main.css' %}">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 </head>
 <body>
     <div class="section">
         <p>Создание cv</p>
     </div>
+    <div class="no-print">
+    <label><input type="checkbox" class="toggle" data-target="about" checked> About</label>
+    <label><input type="checkbox" class="toggle" data-target="education" checked> Education</label>
+    <label><input type="checkbox" class="toggle" data-target="certs" checked> Certificates</label>
+    <label><input type="checkbox" class="toggle" data-target="projects" checked> Projects</label>
+    <button onclick="window.print()">Скачать PDF</button>
+</div>
+
+<div class="section" id="about">...</div>
+<div class="section" id="education">...</div>
+<div class="section" id="certs">...</div>
+<div class="section" id="projects">...</div>
+
+<style>
+    .hidden { display: none !important; }
+    @media print {
+        .no-print { display: none; }
+        body { background: #fff; color: #000; }
+    }
+</style>
+
+<script>
+document.querySelectorAll('.toggle').forEach(cb => {
+    cb.addEventListener('change', () => {
+        document.getElementById(cb.dataset.target)
+            .classList.toggle('hidden', !cb.checked);
+    });
+});
+</script>
 </body>
 </html>
