@@ -48,49 +48,245 @@
             </p>
         </div>
     </aside>
-    <main class="main-content">
-        <div class="no-print checkbox-panel">
-            <label><input type="checkbox" class="toggle" data-target="about" checked> About</label>
-            <label><input type="checkbox" class="toggle" data-target="education" checked> Education</label>
-            <label><input type="checkbox" class="toggle" data-target="certs" checked> Certificates</label>
-            <label><input type="checkbox" class="toggle" data-target="projects" checked> Projects</label>
-            <button onclick="window.print()">Скачать PDF</button>
-        </div>
+    {# Вставьте это целиком вместо вашего <main class="main-content">...</main>, <style> и <script> #}
+<main class="main-content">
 
-        <div class="section" id="about">...</div>
-        <div class="section" id="education">...</div>
-        <div class="section" id="certs">...</div>
-        <div class="section" id="projects">...</div>
-    </main>
+    <!-- ПАНЕЛЬ ВЫБОРА (в PDF не попадает) -->
+    <div class="no-print checkbox-panel">
+        <h3>Что включить в резюме</h3>
+        <label><input type="checkbox" class="toggle" data-target="cv-summary" checked> О себе</label>
+        <label><input type="checkbox" class="toggle" data-target="cv-education" checked> Образование</label>
+        <label><input type="checkbox" class="toggle" data-target="cv-extra-edu" checked> Дополнительное образование</label>
+        <label><input type="checkbox" class="toggle" data-target="cv-projects" checked> Проекты</label>
+        <label><input type="checkbox" class="toggle" data-target="cv-hackathons" checked> Хакатоны</label>
+        <label><input type="checkbox" class="toggle" data-target="cv-conferences" checked> Конференции</label>
+        <label><input type="checkbox" class="toggle" data-target="cv-skills" checked> Навыки</label>
+        <label><input type="checkbox" class="toggle" data-target="cv-interests" checked> Интересы</label>
 
-    <style>
-        .checkbox-panel {
-            display: flex;
-            flex-direction: column;   /* вертикально */
-            align-items: flex-start;
-            gap: 8px;
-            margin-bottom: 20px;
-            color: #f8f8f2;
-        }
-        .checkbox-panel button {
-            margin-top: 8px;
-            padding: 8px 16px;
-            cursor: pointer;
-        }
-        .hidden { display: none !important; }
-        @media print {
-            .no-print { display: none; }
-            body { background: #fff; color: #000; }
-        }
-    </style>
+        <details>
+            <summary>Выбрать отдельные проекты / хакатоны</summary>
+            <label><input type="checkbox" class="toggle" data-target="proj-views" checked> Telegram Views Predictor</label>
+            <label><input type="checkbox" class="toggle" data-target="proj-portfolio" checked> Личный сайт-портфолио</label>
+            <label><input type="checkbox" class="toggle" data-target="proj-ip" checked> Сайт-визитка для ИП</label>
+            <label><input type="checkbox" class="toggle" data-target="proj-esp32" checked> Голосовой ассистент (ESP32)</label>
+            <label><input type="checkbox" class="toggle" data-target="hack-clickise" checked> Clickise</label>
+            <label><input type="checkbox" class="toggle" data-target="hack-cupit" checked> CUP IT 2026</label>
+            <label><input type="checkbox" class="toggle" data-target="hack-purple" checked> IT Purple Hack</label>
+            <label><input type="checkbox" class="toggle" data-target="hack-nornikel" checked> Норникель</label>
+        </details>
+
+        <button type="button" onclick="window.print()">Скачать PDF</button>
+    </div>
+
+    <!-- САМО РЕЗЮМЕ (только оно уходит в PDF) -->
+    <div id="cv">
+
+        <!-- Шапка: всегда видна -->
+        <header class="cv-header">
+            <h1>Никитинская Алёна Александровна</h1>
+            <p class="cv-role">Backend Developer (C++/Java)</p>
+            <p class="cv-goal">Ищу стажировку / Junior Backend Developer</p>
+            <p class="cv-contacts">
+                alena.nik.07@mail.ru · +7 (916) 724-81-69 · Telegram: @alena_nikit<br>
+                github.com/Helen11-png · LinkedIn · leetcode.com/u/helen11_png · helen-nik2007.ru
+            </p>
+        </header>
+
+        <section class="section" id="cv-summary">
+            <h2>О себе</h2>
+            <p>
+                Студентка 2 курса РТУ МИРЭА (Информационные системы и технологии, направление Full-Stack),
+                увлечена backend-разработкой, C++/Java, распределёнными системами и DevOps.
+                Ищу стажировку или позицию junior backend-разработчика. Увлекаюсь embedded-разработкой.
+            </p>
+        </section>
+
+        <section class="section" id="cv-education">
+            <h2>Образование</h2>
+            <div class="cv-item">
+                <div class="cv-row"><b>РТУ МИРЭА</b><span>2025 — 2029 (ожид.)</span></div>
+                <p>Информационные системы и технологии, специализация Full-Stack Development</p>
+                <ul>
+                    <li>Переведена в группу ТОП-ИТ (федеральный проект Минцифры России и Аналитического центра при Правительстве РФ по подготовке высококвалифицированных ИТ-специалистов)</li>
+                </ul>
+            </div>
+            <div class="cv-item">
+                <div class="cv-row"><b>University of the People (WASC Accredited)</b><span>Sep 2026 — н.в.</span></div>
+                <p>B.Sc. Computer Science</p>
+            </div>
+        </section>
+
+        <section class="section" id="cv-extra-edu">
+            <h2>Дополнительное образование</h2>
+            <div class="cv-item">
+                <div class="cv-row"><b>Московская школа программистов</b><span>2020 — 2025 (5 лет)</span></div>
+                <p>Полный курс подготовки программистов. Итоговый проект: веб-приложение для изучения русского языка (Django), разработано в команде.</p>
+            </div>
+            <div class="cv-item">
+                <div class="cv-row"><b>Элитная подготовка от Кампуса Инноваций Samsung</b><span>2026 — н.в.</span></div>
+                <p>Направление «Интеллектуальные системы интернета вещей».</p>
+            </div>
+        </section>
+
+        <section class="section" id="cv-projects">
+            <h2>Проекты</h2>
+
+            <div class="cv-item" id="proj-views">
+                <div class="cv-row"><b>Telegram Views Predictor</b><span>Python, ML</span></div>
+                <ul>
+                    <li>ML-модель для прогнозирования охватов постов в Telegram по CPM, дате создания канала и названию</li>
+                    <li>github.com/Helen11-png/Telegram_Views_Predictor</li>
+                </ul>
+            </div>
+
+            <div class="cv-item" id="proj-portfolio">
+                <div class="cv-row"><b>Личный сайт-портфолио</b><span>HTML/CSS, деплой</span></div>
+                <ul>
+                    <li>Разработан и задеплоен персональный сайт-визитка</li>
+                    <li>helen-nik2007.ru</li>
+                </ul>
+            </div>
+
+            <div class="cv-item" id="proj-ip">
+                <div class="cv-row"><b>Сайт-визитка для ИП</b><span>фриланс-проект</span></div>
+                <ul>
+                    <li>Разработан и задеплоен сайт-визитка для индивидуального предпринимателя (частный проект, репозиторий закрыт)</li>
+                    <li>ИП Никитинский А.В. — официальный сайт</li>
+                </ul>
+            </div>
+
+            <div class="cv-item" id="proj-esp32">
+                <div class="cv-row"><b>Экспериментальный проект: голосовой ассистент с ESP32</b></div>
+                <ul>
+                    <li>Разработан работающий скрипт настольного голосового ассистента</li>
+                    <li>Начата интеграция с ESP32; настроено подключение устройства к Wi-Fi</li>
+                    <li>Дальнейшая интеграция находится в процессе изучения</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="section" id="cv-hackathons">
+            <h2>Хакатоны</h2>
+
+            <div class="cv-item" id="hack-clickise">
+                <div class="cv-row"><b>Clickise — Master of Telegram Ads: Development Edition</b><span>9 место</span></div>
+                <ul><li>Разработала ML-модель, прогнозирующую охваты постов в Telegram</li></ul>
+            </div>
+
+            <div class="cv-item" id="hack-cupit">
+                <div class="cv-row"><b>CUP IT 2026</b></div>
+                <ul><li>UI/UX-дизайн сайта для кейса банка ОТП</li></ul>
+            </div>
+
+            <div class="cv-item" id="hack-purple">
+                <div class="cv-row"><b>IT Purple Hack</b></div>
+                <ul><li>Разработка сайта для обучения молодёжи финансовой грамотности на примере страхования (кейс от Ингосстрах)</li></ul>
+            </div>
+
+            <div class="cv-item" id="hack-nornikel">
+                <div class="cv-row"><b>Норникель</b></div>
+                <ul>
+                    <li>Разработка сайта на основе ИИ для анализа предоставленных документов</li>
+                    <li>Построение графа знаний по документам, генерация краткого ответа на вопрос с опорой на найденные данные, автоматическое формирование списка источников и тезисов</li>
+                    <li>Реализовано предупреждение пользователя при недостатке данных для ответа</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="section" id="cv-conferences">
+            <h2>Конференции и научная активность</h2>
+            <ul>
+                <li>РТУ МИРЭА, конференция по английскому языку — доклад «Energy Efficiency of Code as a Way to Save Water»</li>
+                <li>РТУ МИРЭА, конференция по физике (ПМТ-2026) — «Разработка программного модуля для анализа электрических цепей постоянного тока»</li>
+                <li>НИУ ВШЭ, конференция по физике — «Модель Изинга на квадратной решётке (метод Монте-Карло)»</li>
+                <li>Кемеровский государственный университет, конференция по истории — «Героев помним поимённо»</li>
+                <li>РТУ МИРЭА, конференция по истории — «Современные тренды технологического развития»</li>
+            </ul>
+            <p>По части докладов получены сертификаты участника и рецензии; один доклад принят к публикации в сборнике.</p>
+        </section>
+
+        <section class="section" id="cv-skills">
+            <h2>Навыки</h2>
+            <ul class="cv-skills">
+                <li><b>Языки программирования:</b> C++, Python, SQL (PostgreSQL, базовый уровень), Java (изучаю)</li>
+                <li><b>Backend:</b> Django, основы REST</li>
+                <li><b>Инструменты:</b> Git, GitHub, Linux, Arduino IDE (базовый опыт), SimulIDE (начальный опыт)</li>
+                <li><b>LeetCode:</b> активно решаю алгоритмические задачи</li>
+                <li><b>Языки:</b> русский — родной; английский — TOEFL iBT 64 (действителен до ноября 2026)</li>
+                <li><b>Базовый уровень:</b> Java, Qt</li>
+                <li><b>Изучаю:</b> Spring Boot, Spring Data JPA, Spring Security, JUnit, Testcontainers</li>
+            </ul>
+        </section>
+
+        <section class="section" id="cv-interests">
+            <h2>Интересы</h2>
+            <p>Backend Development · C++ · Distributed Systems · DevOps · Machine Learning · Java</p>
+        </section>
+
+    </div>
+</main>
+
+<style>
+    /* Панель выбора */
+    .checkbox-panel {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+        margin-bottom: 20px;
+        color: #f8f8f2;
+    }
+    .checkbox-panel h3 { margin: 0 0 4px; color: #8BE9FD; }
+    .checkbox-panel details { margin-top: 6px; }
+    .checkbox-panel details label { display: block; margin: 6px 0 0 12px; }
+    .checkbox-panel button { margin-top: 8px; padding: 8px 16px; cursor: pointer; }
+
+    /* Оформление резюме на экране */
+    .cv-header { text-align: center; margin-bottom: 20px; }
+    .cv-header h1 { margin: 0; color: #8BE9FD; }
+    .cv-role { margin: 4px 0; color: #dded95; font-size: 18px; }
+    .cv-goal, .cv-contacts { margin: 4px 0; color: #f8f8f2; }
+    .cv-item { margin-bottom: 16px; }
+    .cv-row { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+    .cv-row span { color: #6272a4; }
+    #cv p, #cv li { color: #f8f8f2; line-height: 1.5; }
+    #cv ul { margin: 6px 0 0 20px; padding: 0; }
+
+    .hidden { display: none !important; }
+
+    /* Печать / PDF: светлая версия только резюме */
+    @media print {
+        .no-print, .sidebar, .menu-toggle, .language-switcher { display: none !important; }
+        body { background: #fff !important; color: #000 !important; display: block !important; }
+        .main-content { margin: 0 !important; padding: 0 !important; width: 100% !important; max-width: none !important; }
+        #cv, #cv * { color: #000 !important; }
+        #cv .section { background: none !important; border: none !important; box-shadow: none !important; padding: 0 0 10px !important; }
+        #cv h1, #cv h2 { color: #000 !important; }
+        #cv h2 { border-bottom: 1px solid #000; padding-bottom: 2px; font-size: 15px; text-transform: uppercase; }
+        .cv-item { break-inside: avoid; }
+        @page { margin: 15mm; }
+    }
+</style>
 
 <script>
-document.querySelectorAll('.toggle').forEach(cb => {
-    cb.addEventListener('change', () => {
-        document.getElementById(cb.dataset.target)
-            .classList.toggle('hidden', !cb.checked);
+    // Чекбоксы показывают/скрывают блоки и запоминают выбор в браузере
+    const STORE_KEY = 'cv_toggles';
+    let saved = {};
+    try { saved = JSON.parse(localStorage.getItem(STORE_KEY) || '{}'); } catch (e) {}
+
+    document.querySelectorAll('.toggle').forEach(cb => {
+        const target = document.getElementById(cb.dataset.target);
+        if (!target) return;
+
+        if (cb.dataset.target in saved) cb.checked = saved[cb.dataset.target];
+        target.classList.toggle('hidden', !cb.checked);
+
+        cb.addEventListener('change', () => {
+            target.classList.toggle('hidden', !cb.checked);
+            saved[cb.dataset.target] = cb.checked;
+            try { localStorage.setItem(STORE_KEY, JSON.stringify(saved)); } catch (e) {}
+        });
     });
-});
 </script>
 </body>
 </html>
